@@ -1,6 +1,6 @@
 # Modern BLP Converter
 
-A cross-platform Avalonia desktop application for converting Warcraft III BLP textures and PNG images.
+A cross-platform Avalonia desktop application for converting BLP textures and PNG images.
 
 ## Features
 
