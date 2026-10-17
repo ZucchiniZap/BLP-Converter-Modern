@@ -1,0 +1,66 @@
+<Window xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:vm="using:AvaloniaApplication1.ViewModels"
+		x:Class="AvaloniaApplication1.Views.MainWindow"
+		x:DataType="vm:MainWindowViewModel"
+		Title="Modern BLP Converter"
+		Width="820" Height="700"
+		MinWidth="600" MinHeight="600"
+		WindowStartupLocation="CenterScreen">
+  <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto,Auto" Margin="24" RowSpacing="14">
+	<StackPanel Grid.Row="0" Spacing="4">
+	  <TextBlock Text="Modern BLP Converter" FontSize="24" FontWeight="Bold" />
+	  <TextBlock Text="Convert PNG and BLP textures with configurable compression and mipmaps." Foreground="Gray" />
+	</StackPanel>
+
+	<Border Grid.Row="1" Padding="16" CornerRadius="8" BorderBrush="Gray" BorderThickness="1">
+	  <StackPanel Spacing="5" HorizontalAlignment="Center">
+		<TextBlock Text="Drop PNG/BLP files or folders here" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center" />
+		<TextBlock Text="Folders are scanned recursively; multiple files and folders can be dropped together." Foreground="Gray" TextWrapping="Wrap" HorizontalAlignment="Center" />
+	  </StackPanel>
+	</Border>
+
+	<Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+	  <TextBlock Text="{Binding InputLabel}" VerticalAlignment="Center" MinWidth="90" />
+	  <TextBox Grid.Column="1" Text="{Binding InputPath}" PlaceholderText="Select files or drop folders" IsReadOnly="True" />
+	  <Button Grid.Column="2" Content="Browse..." Command="{Binding SelectInputFileCommand}" />
+	</Grid>
+
+	<Grid Grid.Row="3" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+	  <TextBlock Text="{Binding OutputLabel}" VerticalAlignment="Center" MinWidth="90" />
+	  <TextBox Grid.Column="1" Text="{Binding OutputPath}" PlaceholderText="{Binding OutputPathPlaceholder}" IsReadOnly="{Binding IsBatchMode}" />
+	  <Button Grid.Column="2" Content="{Binding OutputPickerLabel}" Command="{Binding SelectOutputPathCommand}" IsVisible="{Binding IsSingleFileMode}" />
+	</Grid>
+
+	<Border Grid.Row="4" Padding="18" CornerRadius="8" BorderBrush="Gray" BorderThickness="1">
+	  <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,*" ColumnSpacing="24" RowSpacing="18">
+		<StackPanel Grid.Row="0" Grid.Column="0" Spacing="6">
+		  <TextBlock Text="BLP compression" FontWeight="SemiBold" />
+		  <ComboBox ItemsSource="{Binding CompressionOptions}" SelectedItem="{Binding SelectedCompression}" IsEnabled="{Binding IsPngInput}" />
+		</StackPanel>
+		<StackPanel Grid.Row="0" Grid.Column="1" Spacing="6">
+		  <TextBlock Text="Alpha depth" FontWeight="SemiBold" />
+		  <ComboBox ItemsSource="{Binding AlphaDepthOptions}" SelectedItem="{Binding SelectedAlphaDepth}" IsEnabled="{Binding IsPngInput}" />
+		</StackPanel>
+
+		<StackPanel Grid.Row="1" Grid.Column="0" Spacing="8">
+		  <CheckBox Content="Generate mipmaps" IsChecked="{Binding GenerateMipmaps}" IsEnabled="{Binding IsPngInput}" />
+		  <CheckBox Content="Color-key aware mipmapping" IsChecked="{Binding UseColorKeyAwareMipmapping}" IsEnabled="{Binding IsPngInput}" />
+		</StackPanel>
+		<StackPanel Grid.Row="1" Grid.Column="1" Spacing="6">
+		  <TextBlock Text="Color key (RGB hex)" FontWeight="SemiBold" />
+		  <TextBox Text="{Binding ColorKeyHex}" PlaceholderText="#000000" IsEnabled="{Binding IsPngInput}" />
+		</StackPanel>
+
+		<TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="Color-key mipmaps keep opaque pixels in a 2x2 block when at least half are not the selected key color." TextWrapping="Wrap" Foreground="Gray" />
+		<TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="BLP input converts to PNG; PNG input converts to BLP." Foreground="Gray" />
+	  </Grid>
+	</Border>
+
+	<Grid Grid.Row="5" ColumnDefinitions="*,Auto" ColumnSpacing="16">
+	  <TextBlock Text="{Binding StatusMessage}" VerticalAlignment="Center" TextWrapping="Wrap" />
+	  <Button Grid.Column="1" Content="Convert" Command="{Binding ProcessCommand}" Classes="accent" Padding="24,10" />
+	</Grid>
+	<ProgressBar Grid.Row="6" IsIndeterminate="{Binding IsProcessing}" IsVisible="{Binding IsProcessing}" Height="5" />
+  </Grid>
+</Window>

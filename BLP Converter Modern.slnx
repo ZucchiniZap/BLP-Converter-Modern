@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/SereniaBLPLib/">
+    <Project Path="SereniaBLPLib/SereniaBLPLib/SereniaBLPLib.csproj" />
+  </Folder>
+  <Project Path="AvaloniaApplication1/AvaloniaApplication1.csproj" />
+</Solution>

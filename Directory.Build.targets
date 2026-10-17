@@ -1,0 +1,8 @@
+<Project>
+  <Target Name="RemoveSingleFilePublishSymbols" AfterTargets="Publish" Condition="'$(PublishSingleFile)' == 'true'">
+	<ItemGroup>
+	  <_PublishedSymbols Include="$(PublishDir)**\*.pdb" />
+	</ItemGroup>
+	<Delete Files="@(_PublishedSymbols)" />
+  </Target>
+</Project>

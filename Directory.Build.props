@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+	<SixLaborsLicenseKey Condition="'$(SixLaborsLicenseKey)' == '' and '$(SIXLABORS_LICENSE_KEY)' != ''">$(SIXLABORS_LICENSE_KEY)</SixLaborsLicenseKey>
+	<SixLaborsLicenseFile Condition="'$(SixLaborsLicenseFile)' == '' and '$(SIXLABORS_LICENSE_FILE)' != ''">$(SIXLABORS_LICENSE_FILE)</SixLaborsLicenseFile>
+	<SixLaborsLicenseFile Condition="'$(SixLaborsLicenseFile)' == '' and '$(APPDATA)' != '' and Exists('$(APPDATA)\Modern BLP Converter\sixlabors.lic')">$(APPDATA)\Modern BLP Converter\sixlabors.lic</SixLaborsLicenseFile>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,26 @@
+# Visual Studio state and user-specific files
+.vs/
+*.suo
+*.user
+*.sln.docstates
+*.tmp
+*.bak
+*.backup
+
+# Build outputs
+**/bin/
+**/obj/
+artifacts/
+publish/
+**/TestResults/
+*.pdb
+*.dll
+*.exe
+
+# Private licenses, credentials, and certificates
+*.lic
+*.pfx
+*.snk
+*.publishsettings
+.env
+.env.*
